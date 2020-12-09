@@ -50,7 +50,6 @@ namespace TradeWolfRobot.EmailAutomation
             //setting.Locale = "zh-CN";
             //存储cookie会话
             //setting.PersistSessionCookies = true;
-             string a;
             Cef.Initialize(setting);
         }
     }
