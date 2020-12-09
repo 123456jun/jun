@@ -1,0 +1,9 @@
+2020/11/04-10:03:20.350 1aa0 Reusing MANIFEST cache\IndexedDB\https_mail.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/11/04-10:03:20.440 1aa0 Recovering log #56
+2020/11/04-10:03:20.484 1aa0 Reusing old log cache\IndexedDB\https_mail.google.com_0.indexeddb.leveldb/000056.log 
+2020/11/04-10:03:25.232 24b8 Compacting 1@1 + 1@2 files
+2020/11/04-10:03:25.308 24b8 Generated table #59@1: 151 keys, 169371 bytes
+2020/11/04-10:03:25.308 24b8 Compacted 1@1 + 1@2 files => 169371 bytes
+2020/11/04-10:03:25.340 24b8 compacted to: files[ 0 0 1 0 0 0 0 ]
+2020/11/04-10:03:25.340 24b8 Delete type=2 #54
+2020/11/04-10:03:25.340 24b8 Delete type=2 #57

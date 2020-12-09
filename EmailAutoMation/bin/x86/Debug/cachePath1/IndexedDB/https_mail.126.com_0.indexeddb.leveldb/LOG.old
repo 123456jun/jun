@@ -1,0 +1,6 @@
+2020/12/03-15:56:50.096 824 Reusing MANIFEST cachePath1\IndexedDB\https_mail.126.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/12/03-15:56:50.096 824 Recovering log #3
+2020/12/03-15:56:50.193 824 Reusing old log cachePath1\IndexedDB\https_mail.126.com_0.indexeddb.leveldb/000003.log 
+2020/12/03-15:56:54.824 47e8 Level-0 table #5: started
+2020/12/03-15:56:55.001 47e8 Level-0 table #5: 745090 bytes OK
+2020/12/03-15:56:55.055 47e8 Delete type=0 #3

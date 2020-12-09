@@ -1,0 +1,12 @@
+2020/11/09-11:12:22.035 3d74 Reusing MANIFEST cache\IndexedDB\https_mail.126.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/11/09-11:12:22.035 3d74 Recovering log #11
+2020/11/09-11:12:22.114 3d74 Reusing old log cache\IndexedDB\https_mail.126.com_0.indexeddb.leveldb/000011.log 
+2020/11/09-11:12:27.152 3894 Level-0 table #16: started
+2020/11/09-11:12:27.300 3894 Level-0 table #16: 730561 bytes OK
+2020/11/09-11:12:27.359 3894 Delete type=0 #11
+2020/11/09-11:12:28.196 3894 Compacting 1@1 + 1@2 files
+2020/11/09-11:12:28.267 3894 Generated table #17@1: 234 keys, 22448 bytes
+2020/11/09-11:12:28.267 3894 Compacted 1@1 + 1@2 files => 22448 bytes
+2020/11/09-11:12:28.340 3894 compacted to: files[ 0 0 1 0 0 0 0 ]
+2020/11/09-11:12:28.340 3894 Delete type=2 #13
+2020/11/09-11:12:28.373 3894 Delete type=2 #16

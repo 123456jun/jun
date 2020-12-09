@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../element/index.css">
+  <script src="../element/index.js"></script>
+  <link rel="stylesheet" href="../iconfont/iconfont.css">
+  <link rel="stylesheet" href="../css/init.css">
+  <script src="../js/WmlMsg.js"></script>
+</head>
+<style>
+  * {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    color: #98A7B6;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  .app {
+    width: 100%;
+    height: 100%;
+  }
+
+  .main {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+  }
+
+  .top-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background-color: #e8eff4;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid #bbc0c9;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-name {
+    margin-left: 10px;
+    font-size: 15px;
+  }
+
+  .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .log-tag i {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .main-content {
+    height: calc(100% - 57px);
+    width: 100%;
+    display: flex;
+  }
+
+  .nav-box {
+    height: 100%;
+    width: 180px;
+    background-color: #e8eff4;
+    flex-shrink: 0;
+  }
+
+  .nav-list,
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-title {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+  }
+
+  .nav-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding-left: 30px;
+    cursor: pointer;
+    margin-bottom: 3px;
+
+  }
+
+  .nav-option:hover {
+    background-color: #a5dcfa;
+  }
+
+  .nav-option span {
+    margin-left: 10px;
+  }
+
+  .nav-option:hover span,
+  .nav-option:hover i {
+    color: #fff;
+  }
+
+  .nav-option-active {
+    background-color: #a5dcfa;
+  }
+
+  .nav-option-active span,
+  .nav-option-active i {
+    color: #fff;
+  }
+
+  .account-box {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .account-info-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    text-align: left;
+  }
+
+  .account-info-img {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 10px;
+  }
+
+  .account-desc {
+    color: #8c8c8c;
+    font-size: 13px;
+  }
+
+  .account-info {
+    margin-left: 10px;
+  }
+
+  .account-platform-box {
+    padding: 10px 0;
+  }
+
+  .account-platform {
+    font-size: #8c8c8c;
+    text-align: left;
+    height: 23px;
+    line-height: 23px;
+  }
+
+  .account-platform-desc {
+    font-size: 12px;
+    text-align: left;
+    color: #BBC0C9;
+    height: 23px;
+    line-height: 23px;
+  }
+
+  .empower-status {
+    color: #8c8c8c;
+  }
+
+  .bind-time {
+    color: #8c8c8c;
+  }
+
+  .bind-status {
+    height: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bind-status .status-icon {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .status-icon-success {
+    background-color: #52c41a;
+  }
+
+  .status-icon-fail {
+    background-color: #FD4641;
+  }
+
+  .status-icon-before {
+    background-color: #00A1EF;
+  }
+
+  .empower-action {
+    color: #1890FF;
+    cursor: pointer;
+  }
+
+  .el-button--primary span {
+    color: #fff;
+  }
+</style>
+
+<body>
+  <div id="app" class="app">
+    <div class="main">
+      <div class="top-wrap" style="-webkit-app-region:drag;" @dblclick="handleChangeSize">
+        <div class="logo-wrap">
+          <img class="logo-img" src="../img/wmlLogo.png" alt srcset />
+          <div class="logo-name">外贸狼自动化营销授权</div>
+        </div>
+        <div class="log-tag">
+          <i style="-webkit-app-region:no-drag;" class="iconfont" @click.stop="handleTgaClick(item)" :class="item.class"
+            v-for="(item, index) of tag" :key="index"></i>
+        </div>
+      </div>
+      <div class="main-content" style="-webkit-app-region:no-drag;">
+        <div class="nav-box">
+          <div class="nav-list">
+            <div class="nav-item">
+              <div class="nav-title">我的账号</div>
+              <div class="nav-option" :class="{'nav-option-active':activeSidebar === 'socialSet'}"
+                @click="changeSidebar('socialSet')">
+                <i class="iconfont icon-lianxiren"></i>
+                <span>我的账号</span>
+              </div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-title">我的账号</div>
+              <div class="nav-option" :class="{'nav-option-active':activeSidebar === item.type}"
+                v-for="(item,index) of siderbarList" :key="index" @click="changeSidebar(item.type)">
+                <i class="iconfont" :class="item.class"></i>
+                <span>{{item.label}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="account-box" element-loading-text="加载中..." element-loading-background="rgba(255,255,255,1)"
+          v-loading="loading">
+          <div style="height:100%">
+            <el-table :data="tableData" :header-cell-style="{background:'#F5F5F5',color:'#606266'}" height="100%">
+              <el-table-column align="center" label="账号" min-width="200">
+                <template slot-scope="scope">
+                  <div class="account-info-box">
+                    <!-- <img class="account-info-img"
+                      src=""
+                      alt /> -->
+                    <div class="account-info">
+                      <div class="account-name one-row" v-if="scope.row.AccountName && scope.row.AccountName">
+                        {{scope.row.AccountName}}</div>
+                      <div class="account-desc one-row" v-if="scope.row.AccountName && scope.row.AccountName">
+                        {{scope.row.AccountDescription}}</div>
+                      <div v-if="!scope.row.AccountName && !scope.row.AccountName">暂无数据</div>
+                    </div>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column align="center" prop="name" label="平台" min-width="180">
+                <template slot-scope="scope">
+                  <div class="account-platform-box">
+                    <div class="account-platform">{{scope.row.PlatFormName}}</div>
+                    <div class="account-platform-desc">
+                      {{scope.row.PlatformDescription}}
+                    </div>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column align="center" prop="address" label="授权状态">
+                <template>
+                  <div class="empower-status">已授权</div>
+                </template>
+              </el-table-column>
+              <el-table-column align="center" prop="address" label="绑定状态">
+                <template slot-scope="scope">
+                  <div class="bind-status">
+                    <div class="status-icon"
+                      :class="{'status-icon-before':scope.row.Status === 0,'status-icon-success': scope.row.Status === 1, 'status-icon-fail': scope.row.Status === 2}">
+                    </div>
+                    <div class="status-desc">{{scope.row.Status|filtersStatus}}</div>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column align="center" prop="address" label="绑定时间">
+                <template slot-scope="scope">
+                  <div class="bind-time">{{scope.row.Createtime}}</div>
+                </template>
+              </el-table-column>
+              <el-table-column align="center" prop="address" label="操作">
+                <template slot-scope="scope">
+                  <div class="empower-action" @click="handleContactBinding(scope)">解绑</div>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  Vue.use(WmlMsg)
+  var app = new Vue({
+    el: '#app',
+    data: {
+      loading: false,
+      tag: [
+        { class: 'icon-zuidahua', type: 'changBom' },
+        { class: 'icon-guanbi', type: 'close' }
+      ],
+      siderbarList: [
+        // { class: 'icon-email', label: 'Email', type: 'socialSet' },
+        { class: 'icon-in', label: 'LinkedIn', type: 'Linkedin' },
+        { class: 'icon-twitter2', label: 'Twitter', type: 'Twitter' },
+        { class: 'icon-icon-facebook', label: 'Facebook', type: 'Facebook' },
+        { class: 'icon-ins', label: 'Instagram', type: 'Instagram' },
+        { class: 'icon-youxiang', label: '163邮箱', type: 'NetEase163Email' },
+        { class: 'icon-wangyi1', label: '163企业邮箱', type: 'Netease163EnterpriseEmail' },
+        { class: 'icon-youxiang1', label: '126邮箱', type: 'NetEase126Email' },
+        { class: 'icon-wangyi', label: 'Yeah邮箱', type: 'NetEaseYeahEmail' },
+        { class: 'icon-QX-QQyouxiang', label: 'qq邮箱', type: 'QqEmail' },
+        { class: 'icon-tengxunqiyeyouxiang', label: '腾讯企业邮箱', type: 'TencentEnterpriseEmail' },
+        { class: 'icon-Gmail', label: 'GMail', type: 'G_email' },
+        { class: 'icon-aliyouxiang', label: '阿里企业邮箱', type: 'AlicloudEnterpriseEmail' }
+      ],
+      activeSidebar: 'socialSet',
+      tableData: [],
+    },
+    methods: {
+      /**
+       * @author: vince.Liang
+       * @function: 切换侧边栏
+       * @param {String} type 当前点击的侧边栏标识 
+       * @return: undefined
+       */
+      changeSidebar(type) {
+        this.activeSidebar = type
+        this.loading = true
+        SharpObj.socialDisplay(type, res => {
+          res = JSON.parse(res)
+          if (res.Code !== 0) {
+            this.$WmlMsg(res.Msg, 'warning')
+          }
+          this.loading = false
+        })
+      },
+
+      /**
+       * @author: vince.Liang
+       * @function: 初始化
+       * @param none 
+       * @return: undefined
+       */
+      init() {
+        window.changeBrowserIcon = this.changeBrowserIcon
+        window.loadEmpowerList = this.loadEmpowerList
+        this.loadEmpowerList()
+      },
+
+      /**
+       * @author: vince.Liang
+       * @function: 加载授权列表
+       * @param none
+       * @return: undefined
+       */
+      loadEmpowerList() {
+        window.SharpObj.getSocialplatFormData(res => {
+          res = JSON.parse(res)
+          console.log(res)
+          if (res.Code !== 0) {
+            this.$WmlMsg(res.Msg, 'warning')
+            return
+          }
+          this.tableData = res.Data
+        })
+      },
+
+      /**
+      * @author: vince.Liang
+      * @function: 提供c#页面最大化正常化改变窗口图标
+      * @param {Boolean} type 当前页面的状态，true为最大化、false为正常化 
+      * @return: undefined
+      */
+      changeBrowserIcon(type) {
+        for (let item of this.tag) {
+          if (item.type === 'changBom') {
+            if (type) {
+              item.class = 'icon-suoxiaochuangkou'
+            } else {
+              item.class = 'icon-zuidahua'
+            }
+            break
+          }
+        }
+      },
+
+      /**
+       * @author: vince.Liang
+       * @function: 处理页面图标点击
+       * @param {Object} item 当前点击的图标数据
+       * @return: undefined
+       */
+      handleTgaClick(item) {
+        switch (item.type) {
+          case 'changBom':
+            SharpObj.socialMax(res => {
+              res = JSON.parse(res)
+              if (res.Code !== 0) {
+                this.$WmlMsg(res.Msg, 'warning')
+              }
+            })
+            break
+          case 'close':
+            SharpObj.socialClose(res => {
+              res = JSON.parse(res)
+              if (res.Code !== 0) {
+                this.$WmlMsg(res.Msg, 'warning')
+              }
+            })
+            break
+        }
+      },
+
+      /**
+       * @author: vince.Liang
+       * @function: 处理窗口大小改变
+       * @param none 
+       * @return: undefined
+       */
+      handleChangeSize() {
+        SharpObj.socialMax(res => {
+          res = JSON.parse(res)
+          if (res.Code !== 0) {
+            this.$WmlMsg(res.Msg, 'warning')
+          }
+        })
+      },
+
+      /**
+       * @author: vince.Liang
+       * @function: 处理解除绑定事件
+       * @data: 2019-3-27
+       * @param {Objec} scope 当前操作的数据 
+       * @return: 
+       */
+      handleContactBinding(scope) {
+        this.$confirm('将解绑该账号?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          SharpObj.updateSocialplatFormData(JSON.stringify(scope.row), res => {
+            res = JSON.parse(res)
+            if (res.Code !== 0) {
+              this.$WmlMsg(res.Msg, 'warning')
+              return
+            }
+            this.tableData.splice(scope.$index, 1)
+            this.$WmlMsg('解绑成功!')
+            console.log(res)
+          })
+        }).catch(() => {
+          this.$WmlMsg('已取消', 'warning')
+        });
+      }
+    },
+    created() {
+      this.init()
+    },
+    filters: {
+      filtersStatus(status) {
+        switch (status) {
+          case 0:
+            return '未绑定'
+          case 1:
+            return '已绑定'
+          case 2:
+            return '绑定失效'
+        }
+      }
+    }
+  })
+</script>
+
+</html>

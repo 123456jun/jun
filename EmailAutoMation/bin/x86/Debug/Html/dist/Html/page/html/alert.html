@@ -1,0 +1,126 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-07-04 10:39:47
+ * @LastEditTime: 2020-07-09 10:44:34
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \page\html\alert.html\
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../element/index.css">
+  <script src="../element/index.js"></script>
+  <link rel="stylesheet" href="../iconfont/iconfont.css">
+  <link rel="stylesheet" href="../css/init.css">
+  <script src="../js/WmlMsg.js"></script>
+</head>
+<style>
+  * {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .app {
+    width: 100%;
+    height: 100%;
+  }
+
+  .main {
+    width: 100%;
+
+  }
+</style>
+
+<body>
+  <div id="app" class="app">
+    <div class="main">
+      <el-alert @close="closeAlert" v-if="show" :title="config.title" :description="config.description"
+        :closable="config.closable" :center="config.center" :close-text="config['close-text']"
+        :show-icon="config['show-icon']" :effect="config.effect" :type="config.type"></el-alert>
+    </div>
+  </div>
+</body>
+<script>
+  Vue.use(WmlMsg)
+  var app = new Vue({
+    el: '#app',
+    data: {
+      config: {
+        // 标题
+        title: '成功',
+        // 辅助性文字
+        description: '',
+        // 用户是否可关闭
+        closable: false,
+        // 文字是否居中
+        center: false,
+        // 关闭按钮自定义文本
+        'close-text': '',
+        // 是否显示图标
+        'show-icon': true,
+        // 选择提供的主题 light/dark
+        effect: 'light',
+        // 主题 success/warning/info/error
+        type: 'success'
+      },
+      show: true
+    },
+    methods: {
+      /**
+       * @author: vince.Liang
+       * @function: 供c#切换消息弹窗的显示与隐藏
+       * @param {Boolean} show 是否显示弹窗，默认为true
+       * @return: undefined
+       */
+      changeShowAlert(show) {
+        this.show = show
+      },
+
+      /**
+       * @author: vince.Liang
+       * @function: 用户点击关闭弹窗的回调
+       * @param {none}
+       * @return: undefined
+       */
+      closeAlert() {
+        this.show = false
+        window.SharpObj.hideSocialFrm();
+      },
+
+      /**
+       * @author: vince.Liang
+       * @function:供c#配置消息弹窗以及控制弹窗是否打开的方法
+       * @param {Boolean} show 是否显示弹窗，默认为true
+       * @param {Object} config 配置对象
+       * @return: undefined
+       */
+      doConfigureAlert(show, config = {}) {
+        Object.assign(this.config, config)
+        this.show = show
+      }
+
+    },
+    created() {
+      window.doConfigureAlert = this.doConfigureAlert
+      window.changeShowAlert = this.changeShowAlert
+    }
+  })
+</script>
+
+</html>

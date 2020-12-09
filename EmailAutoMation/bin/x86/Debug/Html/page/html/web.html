@@ -1,0 +1,247 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-16 16:03:23
+ * @LastEditTime: 2020-09-23 10:33:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \robot\public\localHtml\web.html
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../iconfont/iconfont.css">
+</head>
+<style>
+  * {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  .top-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #E8EFF4;
+    padding: 10px;
+    height: 100%;
+  }
+
+  .top-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .wml-logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .wml-name {
+    margin-left: 10px;
+    color: #98A7B6;
+  }
+
+  .wml-name-tit {
+    font-weight: 700;
+  }
+
+  .wml-name-desc {
+    font-size: 13px;
+    margin-top: 3px;
+  }
+
+  .nav-option-active .nav-name,
+  .nav-option-active .nav-icon i {
+    color: #00A1EF;
+  }
+
+
+  .nav-icon {
+    text-align: center;
+  }
+
+  .nav-icon i {
+    font-size: 30px;
+    color: #98A7B6;
+  }
+
+  .nav-box {
+    display: flex;
+  }
+
+  .nav-option {
+    margin: 0 18px;
+    cursor: pointer;
+    transform: all 1s;
+  }
+
+  .nav-option:hover .nav-icon i,
+  .nav-option:hover .nav-name {
+    color: #00A1EF;
+  }
+
+  .nav-name {
+    color: #98A7B6;
+    font-size: 15px;
+  }
+
+  .tag-box {
+    display: flex;
+  }
+
+  .tag-box i {
+    font-size: 16px;
+    margin-left: 10px;
+    color: #98A7B6;
+    cursor: pointer;
+  }
+</style>
+
+<body>
+  <div id="topWrap" class="top-wrap" style="-webkit-app-region:drag;">
+    <div class="top-left">
+      <img src="../img/wmlLogo.png" class="wml-logo-img">
+      <div class="wml-name">
+        <div class="wml-name-tit">外贸狼自动化营销机器人</div>
+        <div class="wml-name-desc">演示速率已缓速20倍</div>
+      </div>
+    </div>
+    <div class="top-center">
+      <div class="nav-box">
+        <div class="nav-option nav-option-active" type="email" style="-webkit-app-region:no-drag;">
+          <div class="nav-icon">
+            <i class="iconfont icon-mail"></i>
+          </div>
+          <div class="nav-name">
+            Email
+          </div>
+        </div>
+        <div class="nav-option" type="linkedin" style="-webkit-app-region:no-drag;">
+          <div class="nav-icon">
+            <i class="iconfont icon-linkedin"></i>
+          </div>
+          <div class="nav-name">
+            LinkedIn
+          </div>
+        </div>
+        <div class="nav-option" type="twitter" style="-webkit-app-region:no-drag;">
+          <div class="nav-icon">
+            <i class="iconfont icon-twitter"></i>
+          </div>
+          <div class="nav-name">
+            Twitter
+          </div>
+        </div>
+        <div class="nav-option" type="facebook" style="-webkit-app-region:no-drag;">
+          <div class="nav-icon">
+            <i class="iconfont icon-icomoonfacebook"></i>
+          </div>
+          <div class="nav-name">
+            Facebook
+          </div>
+        </div>
+        <div class="nav-option" type="ins" style="-webkit-app-region:no-drag;">
+          <div class="nav-icon">
+            <i class="iconfont icon-instagram"></i>
+          </div>
+          <div class="nav-name">
+            Instagram
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="top-right">
+      <div class="tag-box">
+        <i class="iconfont icon-zuidahua" id="changeBom" type="changeWin" style="-webkit-app-region:no-drag;"></i>
+        <i class="iconfont icon-guanbi" type="close" style="-webkit-app-region:no-drag;"></i>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  let navElement = document.querySelectorAll('.nav-option')
+  for (let navItem of navElement) {
+    navItem.addEventListener('click', function (e) {
+      SharpObj.showTabPage(navItem.getAttribute('type'), res => {
+        res = JSON.parse(res)
+        if (res.Code === 0) {
+          let activeNavElement = document.querySelectorAll('.nav-option-active')
+          for (let activeEl of activeNavElement) {
+            activeEl.classList.remove('nav-option-active')
+          }
+          navItem.classList.add('nav-option-active')
+        }
+      })
+    })
+  }
+
+  let tagElement = document.querySelectorAll('.tag-box i')
+  for (let tagItem of tagElement) {
+    tagItem.addEventListener('click', function (e) {
+      if (e.target.getAttribute('type') === 'changeWin') {
+        SharpObj.maxBrowser(res => {
+          console.log(res)
+        })
+      }
+      if (e.target.getAttribute('type') === 'close') {
+        SharpObj.closeBrowser()
+      }
+    })
+  }
+
+  /**
+   * @author: vince.Liang
+   * @function: 提供c#页面最大化正常化改变窗口图标
+   * @param {Boolean} type 当前页面的状态，true为最大化、false为正常化 
+   * @return: undefined
+   */
+  function changeBrowserIcon(type) {
+    let el = document.getElementById('changeBom')
+    if (type) {
+      el.classList.remove('icon-zuidahua')
+      el.classList.add('icon-suoxiaochuangkou')
+    } else {
+      el.classList.remove('icon-suoxiaochuangkou')
+      el.classList.add('icon-zuidahua')
+    }
+  }
+
+  let topWrap = document.getElementById('topWrap')
+  topWrap.addEventListener('dblclick', function (e) {
+    if (e.target.id === 'topWrap') {
+      SharpObj.maxBrowser(res => {
+        console.log(res)
+      })
+    }
+  })
+
+  /**
+   * @author: vince.Liang
+   * @function: 提供c#方法改变头部栏样式
+   * @data: 2019-3-27
+   * @param {Srting} type 需要切换的栏目
+   * @return {type}
+   */
+  function changeNavItem(type) {
+    let activeNavElement = document.querySelectorAll('.nav-option-active')
+    for (let activeEl of activeNavElement) {
+      activeEl.classList.remove('nav-option-active')
+    }
+    document.querySelector(`div[type=${type}]`).classList.add('nav-option-active')
+  }
+</script>
+
+</html>

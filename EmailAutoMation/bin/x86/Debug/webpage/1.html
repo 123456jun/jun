@@ -1,0 +1,38 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+客户端:</br>
+    <textarea id="textarea" style="height: 500px; width: 300px;"></textarea>
+    <input type="button" id="send" onclick="send()" value="发送">
+    
+    <input type="text" id="message">
+    <script type="text/javascript">
+        //检查浏览器是否支持WebSocket
+        if (!window.WebSocket) {
+            console.log('您的浏览器不支持WebSocket，请选择其他的浏览器再尝试连接服务器');
+        }
+        var el = document.getElementById("textarea");
+        var wsClient = new WebSocket('ws://127.0.0.1:9999/wsRobot');
+        wsClient.open = function (e) {
+            el.value += "连接成功！\r\n";
+        }
+        wsClient.onclose = function (e) {
+            el.value += "连接断开！\r\n";
+        }
+        wsClient.onmessage = function (e) {
+            console.log(wsClient);
+            el.value += "接收消息：" + e.data + "\r\n";
+        }
+        wsClient.onerror = function (e) {
+            el.value += "连接失败！原因【" + e.data + "】\r\n";
+        }
+        function send() {
+            var oText = document.getElementById("message");
+            wsClient.send( oText.value);
+        }
+    </script>
+</body>
+</html>
