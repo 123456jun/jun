@@ -16,7 +16,7 @@ namespace TradeWolfRobot.EmailAutomation
         /// </summary>
         [STAThread]
         static void Main()
-        {
+        { 
             CefInitialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
