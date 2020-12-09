@@ -29,7 +29,7 @@ namespace TradeWolfRobot.EmailAutomation
             CefSharpSettings.WcfEnabled = true;
 
             setting.Locale = "locales";
-            //添加日志
+            //添加日志666
             setting.LogSeverity = LogSeverity.Error;
             //缓存目录
             //setting.CachePath = "cache";
