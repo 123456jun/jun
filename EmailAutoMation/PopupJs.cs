@@ -11,15 +11,7 @@ namespace RobotForeignWorkflow
     public class PopupJs
     {
         /// <summary>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        /// 弹窗//123456
-=======
-        /// 弹窗//9876
->>>>>>> testdev
-=======
-        /// 弹窗//0000
->>>>>>> testdev
+       //弹窗
         /// </summary>
         /// <param name="cefWebBrowser"></param>
         /// <param name="popupStatus"></param>
